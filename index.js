@@ -5,6 +5,7 @@ const request = require('request');
 
 const CryptoJS = require('crypto-js');
 
+const account = require('./account.json');
 // expressアプリを生成する
 const app = express();
 
@@ -15,8 +16,6 @@ app.get('/', (req, res) => {
 
 const AAtest = (res) => {
     const api = 'https://api4.omniture.com/admin/1.4/rest/?method=Company.GetReportSuites';
-    const username = ''; // please enter your username
-    const secret = '';   // please enter your secret
 
     var uuid = function () {};
     uuid.v4 = function () {
@@ -49,7 +48,7 @@ const AAtest = (res) => {
         return {'X-WSSE': header};
     };
 
-    var wsse = new WSSE(username, secret);
+    var wsse = new WSSE(account.username, account.secret);
     wsse = wsse.getHeader()['X-WSSE'];
 
     console.log(wsse);
